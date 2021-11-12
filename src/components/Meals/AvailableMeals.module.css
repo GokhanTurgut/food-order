@@ -1,0 +1,20 @@
+.meals {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #dddddd;
+}
+
+.meals > div {
+  background-color: #30475e;
+  max-width: 90%;
+  width: 60rem;
+  margin: 1rem 0;
+}
+
+.meals > div > h2 {
+  text-align: center;
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 2rem;
+}

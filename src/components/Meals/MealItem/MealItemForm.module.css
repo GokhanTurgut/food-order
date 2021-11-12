@@ -1,0 +1,33 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.form > button {
+  background-color: #f05454;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  transition: transform 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+.form > button:hover,
+.form > button:active {
+  background-color: rgb(218, 66, 66);
+  transform: scale(1.1);
+}
+
+.amount > label {
+  margin-right: 1rem;
+  font-weight: bold;
+}
+
+.amount > input {
+  font-size: 0.9rem;
+  width: 2.2rem;
+}
