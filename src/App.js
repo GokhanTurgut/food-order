@@ -1,8 +1,10 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import Cart from "./components/Cart/Cart";
 import Header from "./components/Layout/Header";
+import InfoMassage from "./components/Layout/InfoMassage";
 import AvailableMeals from "./components/Meals/AvailableMeals";
-import pizzaBackground from "./images/pizza-background.jpg";
+import CartProvider from "./store/CartProvider";
+import pizzaBackground from "./assets/pizza-background.jpg";
 
 function App() {
   const [cartShown, setCartShown] = useState(false);
@@ -16,12 +18,13 @@ function App() {
   }
 
   return (
-    <Fragment>
+    <CartProvider>
       {cartShown && <Cart onHideCart={hideCartHandler} />}
       <Header onShowCart={showCartHandler} />
+      <InfoMassage />
       <img className="backgroundImage" src={pizzaBackground} alt="Pizza" />
       <AvailableMeals />
-    </Fragment>
+    </CartProvider>
   );
 }
 
