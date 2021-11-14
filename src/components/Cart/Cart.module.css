@@ -1,0 +1,55 @@
+.cartContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.items {
+  margin: 0;
+  padding: 0;
+  color: #dddddd;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  color: #f05454;
+  font-size: 1.5rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.actions > button {
+  border: none;
+  padding: 0.6rem 2rem;
+  border-radius: 30px;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.orderBtn {
+  background-color: #f05454;
+}
+
+.orderBtn:hover,
+.orderBtn:active {
+  background-color: rgb(218, 66, 66);
+  transform: scale(1.1);
+}
+
+.closeBtn {
+  background-color: #dddddd;
+}
+
+.closeBtn:hover,
+.closeBtn:active {
+  background-color: #cac9c9;
+  transform: scale(1.1);
+}

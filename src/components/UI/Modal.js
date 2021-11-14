@@ -5,13 +5,18 @@ import classes from "./Modal.module.css";
 const portalElement = document.getElementById("overlays");
 
 function Modal(props) {
-  <Fragment>
-    {createPortal(<div className={classes.backdrop}></div>, portalElement)}
-    {createPortal(
-      <div className={classes.modal}>{props.children}</div>,
-      portalElement
-    )}
-  </Fragment>;
+  return (
+    <Fragment>
+      {createPortal(
+        <div className={classes.backdrop} onClick={props.onClose}></div>,
+        portalElement
+      )}
+      {createPortal(
+        <div className={classes.modal}>{props.children}</div>,
+        portalElement
+      )}
+    </Fragment>
+  );
 }
 
 export default Modal;
