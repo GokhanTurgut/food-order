@@ -1,0 +1,114 @@
+.cartContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.items {
+  margin: 0;
+  padding: 0;
+  color: #dddddd;
+}
+
+.items > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #dddddd;
+  padding: 1rem;
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemInfo > span {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.itemInfo > small {
+  color: #f05454;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.itemAction {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.itemAmount {
+  border: 1px solid gray;
+  padding: 0.1rem 0.3rem;
+  margin-bottom: 0.4rem;
+}
+
+.itemButtons {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.itemButtons > button {
+  background-color: #f05454;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 1.8rem;
+  transition: transform 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+.itemButtons > button:hover,
+.itemButtons > button:active {
+  background-color: rgb(218, 66, 66);
+  transform: scale(1.1);
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  color: #f05454;
+  font-size: 1.5rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.actions > button {
+  border: none;
+  padding: 0.6rem 2rem;
+  border-radius: 30px;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.orderBtn {
+  background-color: #f05454;
+}
+
+.orderBtn:hover,
+.orderBtn:active {
+  background-color: rgb(218, 66, 66);
+  transform: scale(1.1);
+}
+
+.closeBtn {
+  background-color: #dddddd;
+}
+
+.closeBtn:hover,
+.closeBtn:active {
+  background-color: #cac9c9;
+  transform: scale(1.1);
+}

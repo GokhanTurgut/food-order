@@ -28,7 +28,7 @@ function MealItemForm(props) {
           type="number"
           id={props.id}
           min="1"
-          max="20"
+          max="9"
           step="1"
           defaultValue="1"
         />

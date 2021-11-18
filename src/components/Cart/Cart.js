@@ -1,54 +1,61 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 
+import Modal from "../UI/Modal";
+import CartItems from "./CartItems";
+import OrderForm from "./OrderForm";
 import CartContext from "../../store/cart-context";
 import classes from "./Cart.module.css";
-import Modal from "../UI/Modal";
 
 function Cart(props) {
+  const [orderState, setOrderState] = useState(false);
+  const [orderConfirmed, setOrderConfirmed] = useState(false);
   const cartCtx = useContext(CartContext);
 
-  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
-  const hasItems = cartCtx.items.length > 0;
-
-  function itemRemoveHandler(id) {
-    cartCtx.removeItem(id);
+  function orderHandler() {
+    setOrderState(true);
   }
 
-  function itemAddHandler(item) {
-    cartCtx.addItem({ ...item, amount: 1 });
+  function cancelHandler() {
+    setOrderState(false);
   }
 
-  const cartItems = cartCtx.items.map((item) => (
-    <li key={item.id}>
-      <div className={classes.itemInfo}>
-        <span>{item.name}</span>
-        <small>{`$${item.price.toFixed(2)}`}</small>
-      </div>
-      <div className={classes.itemAction}>
-        <div className={classes.itemAmount}>x{item.amount}</div>
-        <div className={classes.itemButtons}>
-          <button onClick={itemRemoveHandler.bind(null, item.id)}>-</button>
-          <button onClick={itemAddHandler.bind(null, item)}>+</button>
-        </div>
-      </div>
-    </li>
-  ));
+  function confirmHandler(userData) {
+    const orderInformation = {
+      name: userData.name,
+      city: userData.city,
+      address: userData.address,
+      order: [...cartCtx.items],
+    };
+
+    fetch(
+      "https://food-app-8e47b-default-rtdb.europe-west1.firebasedatabase.app/orders.json",
+      {
+        method: "POST",
+        body: JSON.stringify(orderInformation),
+        type: "cors",
+      }
+    ).then((response) => {
+      cartCtx.clear();
+      setOrderConfirmed(true);
+    });
+  }
 
   return (
     <Modal onClose={props.onHideCart}>
-      <div className={classes.cartContainer}>
-        <ul className={classes.items}>{cartItems}</ul>
-        <div className={classes.total}>
-          <span>Total Amount</span>
-          <span>{totalAmount}</span>
-        </div>
-        <div className={classes.actions}>
-          <button className={classes.closeBtn} onClick={props.onHideCart}>
-            Close
+      {!orderState && !orderConfirmed && (
+        <CartItems onHideCart={props.onHideCart} onOrder={orderHandler} />
+      )}
+      {orderState && !orderConfirmed && (
+        <OrderForm onCancel={cancelHandler} onConfirm={confirmHandler} />
+      )}
+      {orderState && orderConfirmed && (
+        <div className={classes.confirmed}>
+          <p>Order confirmed, thank you for your order!</p>
+          <button onClick={props.onHideCart} className={classes.ok}>
+            Ok
           </button>
-          {hasItems && <button className={classes.orderBtn}>Order</button>}
         </div>
-      </div>
+      )}
     </Modal>
   );
 }

@@ -1,4 +1,3 @@
-import Card from "../UI/Card";
 import classes from "./InfoMassage.module.css";
 
 function InfoMassage() {

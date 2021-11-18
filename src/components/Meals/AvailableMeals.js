@@ -1,48 +1,41 @@
-import classes from "./AvailableMeals.module.css";
+import { useEffect, useState } from "react";
 import Card from "../UI/Card";
 import MealItem from "./MealItem/MealItem";
-
-const DUMMY_MEALS = [
-  {
-    id: "p1",
-    name: "Kebab Pizza",
-    description: "mozzarella, kebab",
-    price: 24.99,
-  },
-  {
-    id: "p2",
-    name: "Supreme Pizza",
-    description: "mozzarella, bacon, beef mince, pepperoni, mushroom, olives",
-    price: 19.99,
-  },
-  {
-    id: "p3",
-    name: "BBQ Meatlovers Pizza",
-    description: "BBQ sauce, mozzarella, pepperoni, bacon, beef mince, ham",
-    price: 22.99,
-  },
-  {
-    id: "p4",
-    name: "Hawaiian (Ham & Pineapple) Pizza",
-    description: "mozzarella, ham, pineapple",
-    price: 17.99,
-  },
-  {
-    id: "p5",
-    name: "Pepperoni Pizza",
-    description: "mozzarella, pepperoni",
-    price: 17.99,
-  },
-  {
-    id: "p6",
-    name: "Margherita Pizza",
-    description: "mozzarella, basil, olive oil, salt",
-    price: 14.99,
-  },
-];
+import classes from "./AvailableMeals.module.css";
 
 function AvailableMeals() {
-  const mealsList = DUMMY_MEALS.map((meal) => {
+  const [meals, setMeals] = useState([]);
+  const [mealsLoading, setMealsLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    async function fetchMeals() {
+      const response = await fetch(
+        "https://food-app-8e47b-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
+      );
+      const data = await response.json();
+
+      const fetchedMeals = [];
+
+      for (let key in data) {
+        fetchedMeals.push({
+          id: key,
+          name: data[key].name,
+          description: data[key].description,
+          price: data[key].price,
+        });
+      }
+
+      setMeals(fetchedMeals);
+      setMealsLoading(false);
+    }
+    fetchMeals().catch((error) => {
+      setError(`Error! Could not fetch menu, details: ${error}`);
+      throw new Error(`Error! Could not fetch menu, details: ${error}`);
+    });
+  }, []);
+
+  const mealsList = meals.map((meal) => {
     return (
       <MealItem
         key={meal.id}
@@ -54,14 +47,26 @@ function AvailableMeals() {
     );
   });
 
-  return (
-    <div className={classes.meals}>
+  let content = "";
+
+  if (mealsLoading) {
+    content = <p className={classes.menuLoading}>Menu Loading...</p>;
+  }
+
+  if (!mealsLoading && error !== "") {
+    content = <p className={classes.error}>{error}</p>;
+  }
+
+  if (!mealsLoading && error === "") {
+    content = (
       <Card>
         <h2>Menu</h2>
         <ul>{mealsList}</ul>
       </Card>
-    </div>
-  );
+    );
+  }
+
+  return <div className={classes.meals}>{content}</div>;
 }
 
 export default AvailableMeals;
