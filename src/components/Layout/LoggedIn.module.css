@@ -1,0 +1,27 @@
+.loggedInContainer {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.seperator {
+  width: 1px;
+  height: 40px;
+  background-color: #dddddd;
+}
+
+.logBtn {
+  background-color: #f05454;
+  border: none;
+  padding: 0.5rem 2rem;
+  border-radius: 30px;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  font-size: 1.8rem;
+}
+
+.logBtn:hover,
+.logBtn:active {
+  background-color: rgb(218, 66, 66);
+  transform: scale(1.1);
+}

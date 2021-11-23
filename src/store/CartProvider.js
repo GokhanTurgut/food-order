@@ -58,6 +58,13 @@ function cartReducer(state, action) {
   if (action.type === "CLEAR") {
     return defaultCartState;
   }
+
+  if (action.type === "REPLACE") {
+    return {
+      items: action.cart.items,
+      totalAmount: action.cart.totalAmount,
+    };
+  }
   return defaultCartState;
 }
 
@@ -85,12 +92,17 @@ function CartProvider(props) {
     dispatchCartAction({ type: "CLEAR" });
   }
 
+  function replaceCartHandler(cart) {
+    dispatchCartAction({ type: "REPLACE", cart: cart });
+  }
+
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addCartHandler,
     removeItem: removeCartHandler,
     clear: clearCartHandler,
+    replace: replaceCartHandler,
   };
 
   return (

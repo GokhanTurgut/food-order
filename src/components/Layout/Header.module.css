@@ -4,11 +4,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0rem 4rem;
+  padding: 0rem 5rem;
   color: #dddddd;
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0px;
+  left: 0px;
   width: 100%;
   box-sizing: border-box;
   z-index: 5;
@@ -17,4 +17,26 @@
 .headerContainer h1 {
   font-family: "Satisfy", cursive;
   font-size: 2.5rem;
+}
+
+.loggedInContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logBtn {
+  background-color: #f05454;
+  border: none;
+  padding: 0.5rem 2rem;
+  border-radius: 30px;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  font-size: 1.8rem;
+}
+
+.logBtn:hover,
+.logBtn:active {
+  background-color: rgb(218, 66, 66);
+  transform: scale(1.1);
 }

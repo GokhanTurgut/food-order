@@ -2,20 +2,24 @@ import { useContext } from "react";
 
 import MealItemForm from "./MealItemForm";
 import CartContext from "../../../store/cart-context";
+import AuthContext from "../../../store/auth-context";
 import classes from "./MealItem.module.css";
 
 function MealItem(props) {
   const cartCtx = useContext(CartContext);
+  const authCtx = useContext(AuthContext);
 
   const price = `$${props.price.toFixed(2)}`;
 
   function addToCartHandler(amount) {
-    cartCtx.addItem({
-      id: props.id,
-      name: props.name,
-      amount: amount,
-      price: props.price,
-    });
+    if (authCtx.user) {
+      cartCtx.addItem({
+        id: props.id,
+        name: props.name,
+        amount: amount,
+        price: props.price,
+      });
+    }
   }
 
   return (

@@ -4,6 +4,7 @@ import Header from "./components/Layout/Header";
 import InfoMassage from "./components/Layout/InfoMassage";
 import AvailableMeals from "./components/Meals/AvailableMeals";
 import CartProvider from "./store/CartProvider";
+import AuthProvider from "./store/authProvider";
 import pizzaBackground from "./assets/pizza-background.jpg";
 
 function App() {
@@ -18,13 +19,15 @@ function App() {
   }
 
   return (
-    <CartProvider>
-      {cartShown && <Cart onHideCart={hideCartHandler} />}
-      <Header onShowCart={showCartHandler} />
-      <InfoMassage />
-      <img className="backgroundImage" src={pizzaBackground} alt="Pizza" />
-      <AvailableMeals />
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        {cartShown && <Cart onHideCart={hideCartHandler} />}
+        <Header onShowCart={showCartHandler} />
+        <InfoMassage />
+        <img className="backgroundImage" src={pizzaBackground} alt="Pizza" />
+        <AvailableMeals />
+      </CartProvider>
+    </AuthProvider>
   );
 }
 
